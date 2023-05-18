@@ -5,9 +5,9 @@ An app that lets the user view all departments, view all roles, view all employe
 
 ## Installation
 To install the correct packages, type:   
----npm i---   
+```npm i```   
 then type:   
----npm start---   
+```npm start```   
 to start the app.   
 
 ## User Story
