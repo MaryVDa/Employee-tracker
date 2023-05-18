@@ -1,13 +1,9 @@
-//import mysql2
+
 const mysql = require("mysql2");
-//import inquirer
 const inquirer = require("inquirer");
-//import console.table
-//const cTable = require('console.table');
 
 require("dotenv").config();
 
-//connection to database
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -31,7 +27,6 @@ afterConnection = () => {
   promptUser();
 };
 
-//inquirer prompt for first action
 const promptUser = () => {
   inquirer
     .prompt([
@@ -81,7 +76,6 @@ const promptUser = () => {
     });
 };
 
-//function to show all employees
 showEmployees = () => {
   console.log("Showing all employees.");
   const sql = `SELECT employee.id AS id, employee.first_name, employee.last_name, role.title, role.salary, employee.manager_id FROM employee JOIN role ON employee.role_id = role.id`;
@@ -93,7 +87,6 @@ showEmployees = () => {
   });
 };
 
-//function to add an employee
 addEmployee = () => {
   inquirer
     .prompt([
@@ -141,7 +134,6 @@ addEmployee = () => {
     });
 };
 
-//function to update employee role
 updateRole = () => {
   //get roles from employee table
   const employeeSql = `SELECT * FROM employee`;
@@ -211,7 +203,6 @@ updateRole = () => {
   });
 };
 
-//function to view all roles
 showRoles = () => {
   console.log("Showing all roles.");
 
@@ -225,7 +216,6 @@ showRoles = () => {
   });
 };
 
-//function to add role
 addRole = () => {
   inquirer
     .prompt([
@@ -244,72 +234,21 @@ addRole = () => {
         name: "department_id",
         message: "What is the department id of the new role?",
       },
-      //  {
-      //     type: 'input',
-      //     name: 'role',
-      //     message: 'What role would you like to add?',
-      //     validate: addRole => {
-      //         if(addRole) {
-      //             return true;
-      //         }else {
-      //             console.log('Please enter a role.');
-      //             return false;
-      //         }
-      //       }
-      //     },
-      //     {
-      //         type: 'input',
-      //         name: 'salary',
-      //         message: 'What is the salary of this role?',
-      //         validate: addSalary => {
-      //             if(isNaN(addSalary)) {
-      //                 return true;
-      //             } else {
-      //                 console.log('Please enter a salary.');
-      //                 return false;
-      //             }
-      //         }
-      //     }
     ])
     .then((answer) => {
-    //   const params = [answer.role, answer.salary];
     const {title, salary, department_id} = answer
       //grab dept from department table
       const roleSql = "INSERT INTO role(title, salary, department_id) VALUES (?, ?, ?);"
 
       connection.query(roleSql, [title, salary, department_id], (err, data) => {
         if (err) throw err;
-
-        // const dept = data.map(({ name, id }) => ({ name: name, value: id }));
-
-        // inquirer
-        //   .prompt([
-        //     {
-        //       type: "list",
-        //       name: "dept",
-        //       message: "What department is this role in?",
-        //       choices: dept,
-        //     },
-        //   ])
-        //   .then((deptChoice) => {
-        //     const dept = deptChoice.dept;
-        //     params.push(dept);
-
-        //     const sql = `INSERT INTO role (title, salary, department_id)
-        //                     VALUES (?, ?, ?)`;
-
-            // connection.query(sql, params, (err, result) => {
-            //   if (err) throw err;
               console.log("Added" + answer.role + " to roles.");
 
               promptUser();
-            // });
-        //   });
       });
     });
 };
 
-//function to view all departments
 showDepartments = () => {
   console.log("Showing all departments.");
   const sql = `SELECT department.id AS id, department.name AS department FROM department`;
@@ -321,7 +260,6 @@ showDepartments = () => {
   });
 };
 
-//function to add department
 addDepartment = () => {
   inquirer
     .prompt([
@@ -350,8 +288,3 @@ addDepartment = () => {
       });
     });
 };
-
-//function to quit
-// quit = () => {
-
-// }

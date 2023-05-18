@@ -38,4 +38,4 @@ THEN I am prompted to select an employee to update and their new role and this i
 ## Video Demo
 
 ## Github
-github.com/MaryVDa
+https://github.com/MaryVDa/Employee-tracker
