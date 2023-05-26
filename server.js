@@ -132,7 +132,7 @@ addEmployee = () => {
 updateRole = () => {
   const employeeSql = `SELECT * FROM employee`;
 
-  connection.promise().query(employeeSql, (err, data) => {
+  connection.query(employeeSql, (err, data) => {
     if (err) throw err;
 
     const employees = data.map(({ id, first_name, last_name }) => ({
@@ -157,10 +157,10 @@ updateRole = () => {
         
         const roleSql = `SELECT * FROM role`;
 
-        connection.promise().query(roleSql, (err, data) => {
+        connection.query(roleSql, (err, data) => {
           if (err) throw err;
 
-          const roles = data.map(({ id, title }) => ({
+          const role = data.map(({ id, title }) => ({
             name: title,
             value: id,
           }));
@@ -171,7 +171,7 @@ updateRole = () => {
                 type: "list",
                 name: "role",
                 message: "What is the new role of this employee?",
-                choices: roles,
+                choices: role,
               },
             ])
           
@@ -231,7 +231,7 @@ addRole = () => {
     ])
     .then((answer) => {
     const {title, salary, department_id} = answer
-      //grab dept from department table
+      
       const roleSql = "INSERT INTO role(title, salary, department_id) VALUES (?, ?, ?);"
 
       connection.query(roleSql, [title, salary, department_id], (err, data) => {
