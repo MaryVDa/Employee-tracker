@@ -40,3 +40,6 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 ## Github
 https://github.com/MaryVDa/Employee-tracker
+
+## Credits
+I used instructions from the assignment as well as Google and help from a TA and tutor.
